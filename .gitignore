@@ -1,0 +1,19 @@
+# Entorno virtual
+cartera_env/
+venv/
+env/
+
+# Caché de Python
+__pycache__/
+*.py[cod]
+
+# Archivos de datos descargados (opcional, si no quieres subir CSVs)
+*.csv
+
+# Archivos generados grandes (decide si los quieres incluir)
+*.pdf
+*.docx
+*.png
+*.jpg
+*.jpeg
+*.gif
