@@ -1,6 +1,6 @@
 """
-Análisis de Cartera Conservadora Global (responsive)
-====================================================
+Análisis de Cartera Conservadora Global (5 activos - Responsive)
+==================================================================
 Requisitos: pip install yfinance pandas seaborn matplotlib numpy
 """
 
@@ -16,18 +16,16 @@ from datetime import datetime
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── Clase analizadora (con mejor gestión de tickers fallidos) ──
 class AnalizadorCartera:
     def __init__(self, tasa_rf=0.0315, periodo="3y"):
+        # ── 5 ACTIVOS CONSERVADORES ──
         self.ACTIVOS = {
-            "VHVG.L": "Developed World",
-            "IS3N.DE": "Emerging Markets",
-            "EUNA.DE": "Global Bonds",
-            "IBEI.DE": "Inflation Linked",
-            "XMWO.DE": "MSCI World Swap",
-            "IQQ0.DE": "Min Volatility",
-            "SGLD.L": "Physical Gold",
-        }
+    "IS3N.DE": "Emerging Markets",
+    "EUNA.DE": "Global Bonds",
+    "EUNL.DE": "MSCI World",          
+    "IQQ0.DE": "Min Volatility",
+    "SGLD.L": "Physical Gold",
+}
         self.TICKERS = list(self.ACTIVOS.keys())
         self.TASA_RF = tasa_rf
         self.PERIODO = periodo
@@ -56,7 +54,6 @@ class AnalizadorCartera:
             print(f"❌ Error descargando datos: {e}")
             sys.exit(1)
 
-        # Extraer los precios de cierre y eliminar tickers con pocos datos
         if "Close" not in raw.columns:
             data = raw.dropna(axis=1, how='all')
         else:
@@ -129,7 +126,6 @@ class AnalizadorCartera:
         GOLD = self.COLORES['GOLD']
 
         plt.style.use("dark_background")
-        # Figura más grande y con más margen superior para el título
         fig = plt.figure(figsize=(20, 10), facecolor=BG)
         gs = gridspec.GridSpec(
             1, 2, figure=fig, width_ratios=[1, 1.4],
@@ -137,7 +133,7 @@ class AnalizadorCartera:
             top=0.88, bottom=0.12
         )
 
-        # ── Panel Izquierdo: Barras Sharpe ──
+        # Panel izquierdo: Barras Sharpe
         ax1 = fig.add_subplot(gs[0])
         ax1.set_facecolor(BG)
 
@@ -148,7 +144,7 @@ class AnalizadorCartera:
 
         bars = ax1.barh(y_pos, vals, color=colores, height=0.5, zorder=3)
         ax1.set_yticks(y_pos)
-        ax1.set_yticklabels(etiquetas, color=FG, fontsize=8.5, fontfamily="monospace")
+        ax1.set_yticklabels(etiquetas, color=FG, fontsize=9, fontfamily="monospace")
         ax1.axvline(0, color=FG, lw=0.7, alpha=0.35, zorder=2)
         ax1.axvline(1.0, color=TEAL, lw=1.0, alpha=0.55, linestyle="--", zorder=2)
         ax1.axvline(0.5, color=GOLD, lw=0.8, alpha=0.40, linestyle=":", zorder=2)
@@ -157,7 +153,7 @@ class AnalizadorCartera:
             offset = 0.05 if val >= 0 else -0.05
             ax1.text(val + offset, bar.get_y() + bar.get_height()/2,
                      f"{val:+.2f}", va="center", ha="left" if val >= 0 else "right",
-                     color=FG, fontsize=9, fontfamily="monospace", fontweight="bold")
+                     color=FG, fontsize=10, fontfamily="monospace", fontweight="bold")
 
         x_min, x_max = ax1.get_xlim()
         for i, ticker in enumerate(self.activos_ok):
@@ -166,11 +162,11 @@ class AnalizadorCartera:
             mdd = self.df_sharpe.loc[ticker, "Max Drawdown (%)"]
             ax1.text(x_min + 0.02*(x_max - x_min), i - 0.35,
                      f"ret {ret:+.1f}%  vol {vol:.1f}%  dd {mdd:.1f}%",
-                     color=FG, fontsize=6.5, alpha=0.55,
+                     color=FG, fontsize=7, alpha=0.55,
                      fontfamily="monospace", va="center")
 
         ax1.set_xlabel(f"Sharpe Ratio (anualizado · RF = {self.TASA_RF*100:.2f}%)",
-                       color=FG, labelpad=6, fontsize=9)
+                       color=FG, labelpad=6, fontsize=10)
         ax1.set_title("Sharpe Ratio por activo", color=FG, fontsize=13,
                       fontweight="bold", loc="left", pad=12)
         ax1.tick_params(axis="x", colors=FG, labelsize=8)
@@ -181,7 +177,7 @@ class AnalizadorCartera:
         ax1.legend(loc='lower right', framealpha=0.1, fontsize=7,
                    labelcolor=FG, facecolor=BG)
 
-        # ── Panel Derecho: Mapa de Calor ──
+        # Panel derecho: Mapa de Calor
         ax2 = fig.add_subplot(gs[1])
         ax2.set_facecolor(BG)
 
@@ -196,27 +192,25 @@ class AnalizadorCartera:
             annot=True, cmap=cmap, center=0, vmin=-1, vmax=1,
             fmt=".2f", square=True, ax=ax2,
             linewidths=0.6, linecolor=BG,
-            annot_kws={"size": 9, "color": FG, "family": "monospace", "weight": "bold"},
-            cbar_kws={"shrink": 0.72, "pad": 0.02},
+            annot_kws={"size": 10, "color": FG, "family": "monospace", "weight": "bold"},
+            cbar_kws={"shrink": 0.75, "pad": 0.02},
         )
 
         ax2.set_title("Matriz de Correlación\n(retornos diarios · 3 años)",
                       color=FG, fontsize=13, fontweight="bold", loc="left", pad=12)
         ax2.tick_params(colors=FG, labelsize=9, length=0)
         ax2.set_xticklabels(ax2.get_xticklabels(), rotation=35, ha="right",
-                            color=FG, fontfamily="monospace", fontsize=8.5)
+                            color=FG, fontfamily="monospace", fontsize=9)
         ax2.set_yticklabels(ax2.get_yticklabels(), rotation=0,
-                            color=FG, fontfamily="monospace", fontsize=8.5)
+                            color=FG, fontfamily="monospace", fontsize=9)
 
         cbar = ax2.collections[0].colorbar
         cbar.ax.tick_params(colors=FG, labelsize=8)
         cbar.outline.set_edgecolor(GRID)
 
-        # Título principal (sin solaparse)
-        fig.suptitle("Cartera Conservadora Global · Análisis de Riesgo/Retorno",
+        fig.suptitle("Cartera Conservadora Global (5 activos) · Riesgo/Retorno",
                      color=FG, fontsize=16, fontweight="bold", y=0.98)
 
-        # Pie de página
         fig.text(0.01, 0.01,
                  f"RF BCE: {self.TASA_RF*100:.2f}% · Anualización √{self.N_DIAS} · "
                  f"Período: {self.PERIODO} · {datetime.now().strftime('%Y-%m-%d')}",
@@ -230,10 +224,9 @@ class AnalizadorCartera:
         plt.show()
 
 
-# ── Ejecución principal ──
 if __name__ == "__main__":
     print("\n" + "="*60)
-    print("📊 ANÁLISIS DE CARTERA CONSERVADORA GLOBAL")
+    print("📊 ANÁLISIS DE CARTERA CONSERVADORA GLOBAL (5 ACTIVOS)")
     print("="*60 + "\n")
     analizador = AnalizadorCartera(tasa_rf=0.0315, periodo="3y")
     analizador.descargar_datos()

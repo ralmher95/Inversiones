@@ -14,13 +14,11 @@ from docx.enum.text import WD_ALIGN_PARAGRAPH
 import warnings
 warnings.filterwarnings('ignore')
 
-# ── CONFIGURACIÓN (7 activos conservadores) ─────────────────
+# ── CONFIGURACIÓN ( activos conservadores) ─────────────────
 ACTIVOS = {
-    "VHVG.L": "Developed World",
     "IS3N.DE": "Emerging Markets",
     "EUNA.DE": "Global Bonds",
-    "IBEI.DE": "Inflation Linked",
-    "XMWO.DE": "MSCI World Swap",
+    "EUNL.DE": "MSCI World",          
     "IQQ0.DE": "Min Volatility",
     "SGLD.L": "Physical Gold",
 }
