@@ -100,16 +100,12 @@ python -m venv venv
 source venv/bin/activate   # Linux/macOS
 venv\Scripts\activate      # Windows
 
-3. **Instalar dependencias**
-   ```bash 
-   pip install -r requirements.txt
-   ```
 
 ---
 
 ## 🚀 Ejecución
 
-### Ejecuta los scripts en el siguiente orden para cada perfil.
+# Ejecuta los scripts en el siguiente orden para cada perfil.
 
 # Análisis individual de activos
 python inversionConservadora.py
@@ -128,7 +124,7 @@ python informe_arriesgado.py
 
 ## 📈 Resultados esperados
 
-### Gráficos generados:
+# Gráficos generados:
 
 - Frontera eficiente con 50.000 carteras simuladas.
 
@@ -138,7 +134,7 @@ python informe_arriesgado.py
 
 - Diagrama de barras de pesos óptimos.
 
-### Informe Word que incluye:
+# Informe Word que incluye:
 
 - Tabla con rentabilidad, volatilidad, Sharpe y drawdown de cada activo.
 - Pesos orientativos (referencia inicial) y pesos óptimos calculados.
