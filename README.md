@@ -151,22 +151,6 @@ python informe_arriesgado.py
 - Pesos orientativos (referencia inicial) y pesos óptimos calculados.
 - Composición final de la cartera (máximo Sharpe y mínima varianza).
 
-## 📈 Resultados esperados
-
-- Gráficos generados:
-
-- Frontera eficiente con 50.000 carteras simuladas.
-
-- Ratio de Sharpe vs volatilidad.
-
-- Heatmap de correlación entre activos.
-
-- Diagrama de barras de pesos óptimos.
-
-- Informe Word que incluye:
-- Tabla con rentabilidad, volatilidad, Sharpe y drawdown de cada activo.
-- Pesos orientativos (referencia inicial) y pesos óptimos calculados.
-- Composición final de la cartera (máximo Sharpe y mínima varianza).
 
 ## ⚠️ Limitaciones y deuda técnica
 
