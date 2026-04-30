@@ -3,7 +3,7 @@
 [![Python 3.8+](https://img.shields.io/badge/Python-3.8%2B-blue.svg)](https://www.python.org/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Data Source: Yahoo Finance](https://img.shields.io/badge/Data-Yahoo%20Finance-purple)](https://finance.yahoo.com/)
-![CI Status](https://github.com/ralmher95/Inversiones/actions/workflows/main_check.yml/badge.svg)
+
 
 Análisis financiero y construcción de carteras multi-activo utilizando **Python**, **Yahoo Finance** y la **optimización de Markowitz** mediante **simulación Monte Carlo** (50.000 carteras aleatorias). El proyecto cubre tres perfiles de riesgo —conservador, equilibrado y arriesgado— y genera automáticamente:
 
