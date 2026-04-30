@@ -97,8 +97,13 @@ Análisis financiero y construcción de carteras multi-activo utilizando **Pytho
 2. **Crear un entorno virtual (recomendado)**
 ```bash 
 python -m venv venv
+```
+
+```bash
 source venv/bin/activate   # Linux/macOS
 venv\Scripts\activate      # Windows
+```
+
 
 
 ---
@@ -107,24 +112,30 @@ venv\Scripts\activate      # Windows
 
 # Ejecuta los scripts en el siguiente orden para cada perfil.
 
-# Análisis individual de activos
+### Análisis individual de activos
+```bash
 python inversionConservadora.py
 python inversionEquilibrado.py
 python inversionArriesgada.py
+```
 
 # Optimización de cartera (Markowitz + Monte Carlo)
+```bash
 python markowitzConservadora.py
 python markowitzEquilibrado.py
 python markowitzArriesgada.py
+```
 
-# Generación de informes Word
+### Generación de informes Word
+```bash
 python informe_conservador.py
 python informe_equilibrado.py
 python informe_arriesgado.py
+```
 
 ## 📈 Resultados esperados
 
-# Gráficos generados:
+### Gráficos generados:
 
 - Frontera eficiente con 50.000 carteras simuladas.
 
@@ -134,7 +145,7 @@ python informe_arriesgado.py
 
 - Diagrama de barras de pesos óptimos.
 
-# Informe Word que incluye:
+### Informe Word que incluye:
 
 - Tabla con rentabilidad, volatilidad, Sharpe y drawdown de cada activo.
 - Pesos orientativos (referencia inicial) y pesos óptimos calculados.
